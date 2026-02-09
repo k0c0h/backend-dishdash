@@ -10,3 +10,7 @@ exports.applyBulkDiscount = (price, quantity) => {
   }
   return price;
 };
+
+exports.calculateDate = (year, month, day) => {
+  return + (year-2026, month - 2, day - 9 );
+}

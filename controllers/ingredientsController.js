@@ -5,7 +5,8 @@ const categoryRule = require("../rules/categoryRule");
 const deleteRule = require("../rules/deleteRule");
 const {
   calculatePriceWithIVA,
-  applyBulkDiscount
+  applyBulkDiscount,
+  calculateDate
 } = require("../rules/priceRules");
 
 exports.sellIngredient = async (req, res) => {
@@ -27,6 +28,7 @@ exports.sellIngredient = async (req, res) => {
     // Reglas de negocio
     let priceWithIVA = calculatePriceWithIVA(ingredient.price);
     let finalPrice = applyBulkDiscount(priceWithIVA, quantity);
+    let calculateExpiration = calculateDate(ingredient.year, ingredient.month, ingredient.day);
 
     // Actualizar stock
     ingredient.availableUnits -= quantity;
@@ -36,6 +38,7 @@ exports.sellIngredient = async (req, res) => {
       product: ingredient.name,
       quantity,
       unitPrice: priceWithIVA,
+      expiration: calculateExpiration,
       total: +(finalPrice * quantity).toFixed(2),
       discountApplied: quantity >= 10
     });

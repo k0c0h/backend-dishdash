@@ -8,6 +8,9 @@ const IngredientSchema = new mongoose.Schema({
   brand: String,
   size: Number,
   sizeUnit: String,
+  year: Number,
+  month: Number,
+  day: Number,
   price: Number,
   availableUnits: Number,
   supplier: String
