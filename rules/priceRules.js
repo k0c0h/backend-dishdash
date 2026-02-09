@@ -12,5 +12,11 @@ exports.applyBulkDiscount = (price, quantity) => {
 };
 
 exports.calculateDate = (year, month, day) => {
-  return + (year-2026, month - 2, day - 9 );
+  if (!year || !month || !day) {
+    return 'N/A';
+  }
+  // Crear fecha válida (month - 1 porque JavaScript usa meses 0-11)
+  const date = new Date(year, month - 1, day);
+  // Retornar en formato ISO YYYY-MM-DD
+  return date.toISOString().split('T')[0];
 }
